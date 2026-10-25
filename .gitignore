@@ -13,3 +13,6 @@ b_gemini_cli_agent/workspace/
 # Downloaded MCP Toolbox binary (~290MB) and generated store data
 e_ecommerce_agent/bin/
 e_ecommerce_agent/outputs/audit.log
+
+# Local-only recording notes (not published)
+VIDEO_SCRIPT.md
