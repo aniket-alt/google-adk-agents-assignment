@@ -5,3 +5,7 @@ __pycache__/
 *.db
 node_modules/
 .adk/
+
+# Gemini CLI private config/history and cloned repos
+b_gemini_cli_agent/cli_home/
+b_gemini_cli_agent/workspace/
