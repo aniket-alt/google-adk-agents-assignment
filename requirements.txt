@@ -1,3 +1,4 @@
 google-adk
 mcp<2
 python-dotenv
+ddgs
