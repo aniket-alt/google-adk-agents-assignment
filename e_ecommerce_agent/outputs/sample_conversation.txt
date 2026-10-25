@@ -1,0 +1,49 @@
+Sample run of run_demo.py against Gemini (gemini-3.5-flash). Tool calls are shown as [tool].
+The audit trail for the two writes (prepare_order, confirm_order) is in outputs/audit.log (git-ignored).
+
+>>> CUSTOMER: Hi! I'm looking for a waterproof hiking backpack, budget around $150.
+    [tool] search-products({'max_price': '150', 'keyword': 'backpack', 'category': ''})
+    [tool] search-products({'category': '', 'keyword': 'waterproof', 'max_price': '150'})
+    [tool] search-products({'category': 'Backpacks', 'max_price': '150', 'keyword': ''})
+<<< TRAIL: Here are two backpack options within your $150 budget:
+
+1. **Trailblazer 50L Backpack** (Osprey) – **$139.99**  
+   * **Why it fits:** A fully waterproof 50L hiking backpack with an included rain cover and ventilated back panel, ideal for weekend treks.
+
+2. **DayTripper 22L Pack** (Deuter) – **$64.50**  
+   * **Why it fits:** A lightweight daypack with water-resistant fabric and a hydration sleeve, great for shorter hikes.
+
+Would you like more details on either of these, or are you ready to place an order?
+
+>>> CUSTOMER: The Trailblazer sounds perfect. I'd like to buy 1. My email is alex@example.com
+    [tool] prepare_order({'quantity': '1', 'email': 'alex@example.com', 'product_id': '1'})
+<<< TRAIL: Here is your order summary:
+
+* **Item:** 1 x Trailblazer 50L Backpack ($139.99)
+* **Shipping:** Free ($0.00)
+* **Total:** $139.99
+* **Customer:** Alex Rivera (alex@example.com)
+
+Shall I place this order?
+
+>>> CUSTOMER: Yes, please place the order.
+    [tool] confirm_order({})
+<<< TRAIL: Your order has been successfully placed!
+
+* **Order Number:** 4
+* **Item:** Trailblazer 50L Backpack
+* **Total:** $139.99
+* **Status:** Placed
+
+Thank you for shopping with TrailMart! Let me know if you need help with anything else.
+
+>>> CUSTOMER: Thanks! Can you also tell me the status of my order number 2?
+    [tool] get-order-status({'email': 'alex@example.com', 'order_id': '2'})
+<<< TRAIL: Here is the status for **Order #2**:
+
+* **Item:** 1 x Trailblazer 50L Backpack
+* **Status:** Shipped
+* **Total:** $139.99
+* **Date Placed:** October 25, 2026
+
+Let me know if you need help with anything else!

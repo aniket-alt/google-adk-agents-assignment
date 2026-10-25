@@ -1,0 +1,103 @@
+# MCP Toolbox for Databases configuration: the storefront's READ-ONLY tools.
+# Every statement is parameterized (no string building). Writes (checkout) are handled by validated
+# Python tools in ecommerce_agent/checkout.py, not exposed here.
+kind: source
+name: storefront-db
+type: sqlite
+database: store.db
+---
+kind: tool
+name: search-products
+type: sqlite-sql
+source: storefront-db
+description: >
+  Search in-stock products. 'keyword' is matched against product name, brand and description, so use ONE
+  or TWO short keywords (e.g. "waterproof", "backpack", "trail"), never a whole sentence. Leave category
+  empty to search every category. Use max_price 100000 when the customer gave no budget.
+  Returns id, name, brand, category, price, stock and a short summary.
+parameters:
+  - name: keyword
+    type: string
+    description: One or two short keywords. Empty string matches everything.
+  - name: category
+    type: string
+    description: Exact category name from list-categories, or empty string for all.
+  - name: max_price
+    type: float
+    description: Maximum price in USD.
+statement: |
+  SELECT id, name, brand, category, price, stock, substr(description, 1, 110) AS summary
+  FROM products
+  WHERE stock > 0
+    AND (name LIKE '%' || ?1 || '%' OR brand LIKE '%' || ?1 || '%' OR description LIKE '%' || ?1 || '%')
+    AND (?2 = '' OR category = ?2)
+    AND price <= ?3
+  ORDER BY price
+  LIMIT 8
+---
+kind: tool
+name: get-product-details
+type: sqlite-sql
+source: storefront-db
+description: Get full details (description, price, stock) of one product by its numeric id.
+parameters:
+  - name: product_id
+    type: integer
+    description: Product id from search results.
+statement: SELECT id, name, brand, category, description, price, stock FROM products WHERE id = ?
+---
+kind: tool
+name: list-categories
+type: sqlite-sql
+source: storefront-db
+description: List product categories with the number of in-stock products in each.
+statement: |
+  SELECT category, COUNT(*) AS products_in_stock
+  FROM products WHERE stock > 0 GROUP BY category ORDER BY category
+---
+kind: tool
+name: get-order-status
+type: sqlite-sql
+source: storefront-db
+description: >
+  Look up one order. Both the order id and the email on the order must match, so customers can only
+  see their own orders. Returns status, totals and the items.
+parameters:
+  - name: order_id
+    type: integer
+    description: Order number.
+  - name: email
+    type: string
+    description: The customer's email address.
+statement: |
+  SELECT o.id AS order_id, o.status, o.subtotal, o.shipping, o.total, o.created_at,
+         p.name AS item, oi.quantity, oi.unit_price
+  FROM orders o
+  JOIN customers c ON c.id = o.customer_id
+  JOIN order_items oi ON oi.order_id = o.id
+  JOIN products p ON p.id = oi.product_id
+  WHERE o.id = ?1 AND lower(c.email) = lower(?2)
+---
+kind: tool
+name: list-my-orders
+type: sqlite-sql
+source: storefront-db
+description: List all orders for a customer by email (order id, status, total, date), newest first.
+parameters:
+  - name: email
+    type: string
+    description: The customer's email address.
+statement: |
+  SELECT o.id AS order_id, o.status, o.total, o.created_at
+  FROM orders o JOIN customers c ON c.id = o.customer_id
+  WHERE lower(c.email) = lower(?)
+  ORDER BY o.id DESC
+---
+kind: toolset
+name: storefront
+tools:
+  - search-products
+  - get-product-details
+  - list-categories
+  - get-order-status
+  - list-my-orders

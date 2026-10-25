@@ -9,3 +9,7 @@ node_modules/
 # Gemini CLI private config/history and cloned repos
 b_gemini_cli_agent/cli_home/
 b_gemini_cli_agent/workspace/
+
+# Downloaded MCP Toolbox binary (~290MB) and generated store data
+e_ecommerce_agent/bin/
+e_ecommerce_agent/outputs/audit.log
