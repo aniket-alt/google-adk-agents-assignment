@@ -3,13 +3,13 @@
 Five end-to-end agents built with the [Google Agent Development Kit (ADK)](https://google.github.io/adk-docs/),
 each inspired by a Google tutorial/reference repository but designed and implemented independently.
 
-| | Agent | Core idea | Folder |
-|---|---|---|---|
-| a | **Deep research lead generation** | Sequential pipeline with structured hand-offs and a self-critique research loop; scored leads with sources, report + CSV | [`a_lead_generation_agent`](a_lead_generation_agent) |
-| b | **Gemini CLI as a tool** | An ADK pipeline that drives Google's Gemini CLI (headless, read-only, no shell) to analyze a GitHub repo and write an onboarding guide | [`b_gemini_cli_agent`](b_gemini_cli_agent) |
-| c | **MCP bug assistant** | Agent + custom MCP server (SQLite bug tracker) + web search; finds duplicates, proposes fixes, files tickets | [`c_bug_assistant_agent`](c_bug_assistant_agent) |
-| d | **Code review assistant** | Deterministic static analysis (AST, security, PEP 8, optional run) + LLM review + a fix loop whose fixes are *re-verified* by the same analysis | [`d_code_review_agent`](d_code_review_agent) |
-| e | **E-commerce agent** | MCP Toolbox for Databases (declarative read-only SQL) + transactional, two-step guarded checkout, audit log | [`e_ecommerce_agent`](e_ecommerce_agent) |
+| | Agent | Core idea | Folder | Videos |
+|---|---|---|---|---|
+| a | **Deep research lead generation** | Sequential pipeline with structured hand-offs and a self-critique research loop; scored leads with sources, report + CSV | [`a_lead_generation_agent`](a_lead_generation_agent) | [`VIDEO`](a_lead_generation_agent) |
+| b | **Gemini CLI as a tool** | An ADK pipeline that drives Google's Gemini CLI (headless, read-only, no shell) to analyze a GitHub repo and write an onboarding guide | [`b_gemini_cli_agent`](b_gemini_cli_agent) | [`VIDEO`](https://drive.google.com/file/d/1B_kZ6mWkEnI7_EPNuE5pHgUwHnYksb0b/view?usp=sharing) |
+| c | **MCP bug assistant** | Agent + custom MCP server (SQLite bug tracker) + web search; finds duplicates, proposes fixes, files tickets | [`c_bug_assistant_agent`](c_bug_assistant_agent) | [`VIDEO`](a_lead_generation_agent) |
+| d | **Code review assistant** | Deterministic static analysis (AST, security, PEP 8, optional run) + LLM review + a fix loop whose fixes are *re-verified* by the same analysis | [`d_code_review_agent`](d_code_review_agent) | [`VIDEO`](a_lead_generation_agent) |
+| e | **E-commerce agent** | MCP Toolbox for Databases (declarative read-only SQL) + transactional, two-step guarded checkout, audit log | [`e_ecommerce_agent`](e_ecommerce_agent) | [`VIDEO`](a_lead_generation_agent) |
 
 Every folder has its own README with architecture, design decisions, how to run it and the demo script.
 
