@@ -5,7 +5,7 @@ each inspired by a Google tutorial/reference repository but designed and impleme
 
 | | Agent | Core idea | Folder | Videos |
 |---|---|---|---|---|
-| a | **Deep research lead generation** | Sequential pipeline with structured hand-offs and a self-critique research loop; scored leads with sources, report + CSV | [`a_lead_generation_agent`](a_lead_generation_agent) | [`VIDEO`](a_lead_generation_agent) |
+| a | **Deep research lead generation** | Sequential pipeline with structured hand-offs and a self-critique research loop; scored leads with sources, report + CSV | [`a_lead_generation_agent`](a_lead_generation_agent) | [`VIDEO`]([a_lead_generation_agent](https://drive.google.com/file/d/1xfx2Pfzj5pAqF32-STO4vlBzH90k0m9F/view?usp=sharing)) |
 | b | **Gemini CLI as a tool** | An ADK pipeline that drives Google's Gemini CLI (headless, read-only, no shell) to analyze a GitHub repo and write an onboarding guide | [`b_gemini_cli_agent`](b_gemini_cli_agent) | [`VIDEO`](https://drive.google.com/file/d/1B_kZ6mWkEnI7_EPNuE5pHgUwHnYksb0b/view?usp=sharing) |
 | c | **MCP bug assistant** | Agent + custom MCP server (SQLite bug tracker) + web search; finds duplicates, proposes fixes, files tickets | [`c_bug_assistant_agent`](c_bug_assistant_agent) | [`VIDEO`](a_lead_generation_agent) |
 | d | **Code review assistant** | Deterministic static analysis (AST, security, PEP 8, optional run) + LLM review + a fix loop whose fixes are *re-verified* by the same analysis | [`d_code_review_agent`](d_code_review_agent) | [`VIDEO`](a_lead_generation_agent) |
